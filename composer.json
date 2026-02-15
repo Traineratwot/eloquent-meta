@@ -1,17 +1,17 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "traineratwot/eloquent-meta",
+    "description": "Meta data for columns of laravel models. integraded with filamentphp",
     "keywords": [
-        ":vendor_name",
+        "Traineratwot",
         "laravel",
-        ":package_slug"
+        "eloquent-meta"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/traineratwot/eloquent-meta",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Traineratwot",
+            "email": "traineratwot@yandex.ru",
             "role": "Developer"
         }
     ],
@@ -23,25 +23,21 @@
     "require-dev": {
         "laravel/pint": "^1.14",
         "nunomaduro/collision": "^8.8",
-        "larastan/larastan": "^3.0",
         "orchestra/testbench": "^10.0.0||^9.0.0",
         "pestphp/pest": "^4.0",
         "pestphp/pest-plugin-arch": "^4.0",
         "pestphp/pest-plugin-laravel": "^4.0",
-        "phpstan/extension-installer": "^1.4",
-        "phpstan/phpstan-deprecation-rules": "^2.0",
-        "phpstan/phpstan-phpunit": "^2.0",
         "spatie/laravel-ray": "^1.35"
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src/",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories/"
+            "Traineratwot\\EloquentMeta\\": "src/",
+            "Traineratwot\\EloquentMeta\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests/",
+            "Traineratwot\\EloquentMeta\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
@@ -63,10 +59,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "Traineratwot\\EloquentMeta\\EloquentMetaServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "EloquentMeta": "Traineratwot\\EloquentMeta\\Facades\\EloquentMeta"
             }
         }
     },
