@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('eloquent_meta', function (Blueprint $table) {
+        Schema::create('eloquent_metas', function (Blueprint $table) {
             $table->id();
 
             $table->morphs('model');
@@ -21,6 +21,6 @@ return new class extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists('eloquent_column_meta');
+        Schema::dropIfExists('eloquent_metas');
     }
 };

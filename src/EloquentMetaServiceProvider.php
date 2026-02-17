@@ -19,7 +19,7 @@ class EloquentMetaServiceProvider extends PackageServiceProvider
             ->name('eloquent-meta')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('2026_02_17_120907_create_eloquent_meta_table')
+            ->hasMigration('create_eloquent_meta_table')
             ->hasCommand(EloquentMetaCommand::class);
     }
 }
