@@ -12,15 +12,15 @@ use Traineratwot\EloquentMeta\Models\EloquentMeta;
  */
 trait Meta
 {
-
     public function meta(string $column, ?string $key = null, mixed $value = null)
     {
         if (blank($key)) {
             return $this->getMeta($column);
         }
-        if(blank($value)){
-            return $this->getMeta($column,$key);
+        if (blank($value)) {
+            return $this->getMeta($column, $key);
         }
+
         return $this->setMeta($column, $key, $value);
     }
 
@@ -29,13 +29,13 @@ trait Meta
      */
     public function getMeta(string $column, ?string $key = null, mixed $default = null): mixed
     {
-        if (!$this->relationLoaded('metas')) {
+        if (! $this->relationLoaded('metas')) {
             $this->load('metas');
         }
 
         $meta = $this->metas->firstWhere('column', $column);
 
-        if (!$meta) {
+        if (! $meta) {
             return $default;
         }
 
@@ -62,7 +62,7 @@ trait Meta
 
         // Обновляем загруженное отношение
         if ($this->relationLoaded('metas')) {
-            $this->metas = $this->metas->map(fn($m) => $m->id === $meta->id ? $meta : $m);
+            $this->metas = $this->metas->map(fn ($m) => $m->id === $meta->id ? $meta : $m);
         }
 
         return $this;
@@ -81,7 +81,7 @@ trait Meta
         $data = $meta->data ?? [];
         $current = data_get($data, $key, []);
 
-        if (!is_array($current)) {
+        if (! is_array($current)) {
             $current = [$current];
         }
 
@@ -91,7 +91,7 @@ trait Meta
 
         // Обновляем загруженное отношение
         if ($this->relationLoaded('metas')) {
-            $this->metas = $this->metas->map(fn($m) => $m->id === $meta->id ? $meta : $m);
+            $this->metas = $this->metas->map(fn ($m) => $m->id === $meta->id ? $meta : $m);
         }
 
         return $this;
@@ -104,7 +104,7 @@ trait Meta
     {
         $meta = $this->metas()->where('column', $column)->first();
 
-        if (!$meta) {
+        if (! $meta) {
             return $this;
         }
 
@@ -113,7 +113,7 @@ trait Meta
             $meta->delete();
 
             if ($this->relationLoaded('metas')) {
-                $this->metas = $this->metas->reject(fn($m) => $m->id === $meta->id);
+                $this->metas = $this->metas->reject(fn ($m) => $m->id === $meta->id);
             }
         } else {
             // Удалить конкретный ключ из данных
@@ -123,12 +123,12 @@ trait Meta
             if (empty($data)) {
                 $meta->delete();
                 if ($this->relationLoaded('metas')) {
-                    $this->metas = $this->metas->reject(fn($m) => $m->id === $meta->id);
+                    $this->metas = $this->metas->reject(fn ($m) => $m->id === $meta->id);
                 }
             } else {
                 $meta->update(['data' => $data]);
                 if ($this->relationLoaded('metas')) {
-                    $this->metas = $this->metas->map(fn($m) => $m->id === $meta->id ? $meta : $m);
+                    $this->metas = $this->metas->map(fn ($m) => $m->id === $meta->id ? $meta : $m);
                 }
             }
         }
@@ -141,13 +141,13 @@ trait Meta
      */
     public function hasMeta(string $column, ?string $key = null): bool
     {
-        if (!$this->relationLoaded('metas')) {
+        if (! $this->relationLoaded('metas')) {
             $this->load('metas');
         }
 
         $meta = $this->metas->firstWhere('column', $column);
 
-        if (!$meta) {
+        if (! $meta) {
             return false;
         }
 
@@ -163,7 +163,7 @@ trait Meta
      */
     public function getAllMeta(string $column): array
     {
-        if (!$this->relationLoaded('metas')) {
+        if (! $this->relationLoaded('metas')) {
             $this->load('metas');
         }
 
