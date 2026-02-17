@@ -13,8 +13,11 @@ use Traineratwot\EloquentMeta\Models\EloquentMeta;
 trait Meta
 {
 
-    public function meta(string $column, string $key, mixed $value = null)
+    public function meta(string $column, ?string $key = null, mixed $value = null)
     {
+        if (blank($key)) {
+            return $this->getMeta($column);
+        }
         if(blank($value)){
             return $this->getMeta($column,$key);
         }
@@ -24,7 +27,7 @@ trait Meta
     /**
      * Получить метаданные по колонке и ключу
      */
-    public function getMeta(string $column, string $key = null, mixed $default = null): mixed
+    public function getMeta(string $column, ?string $key = null, mixed $default = null): mixed
     {
         if (!$this->relationLoaded('metas')) {
             $this->load('metas');
@@ -97,7 +100,7 @@ trait Meta
     /**
      * Удалить метаданные по ключу
      */
-    public function forgetMeta(string $column, string $key = null): self
+    public function forgetMeta(string $column, ?string $key = null): self
     {
         $meta = $this->metas()->where('column', $column)->first();
 
@@ -136,7 +139,7 @@ trait Meta
     /**
      * Проверить наличие метаданных
      */
-    public function hasMeta(string $column, string $key = null): bool
+    public function hasMeta(string $column, ?string $key = null): bool
     {
         if (!$this->relationLoaded('metas')) {
             $this->load('metas');
