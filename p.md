@@ -1,0 +1,170 @@
+```composer.json
+{
+    "name": "traineratwot/eloquent-meta",
+    "description": "Meta data for columns of laravel models. integraded with filamentphp",
+    "keywords": [
+        "Traineratwot",
+        "laravel",
+        "eloquent-meta"
+    ],
+    "homepage": "https://github.com/traineratwot/eloquent-meta",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Traineratwot",
+            "email": "traineratwot@yandex.ru",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.4",
+        "spatie/laravel-package-tools": "^1.16",
+        "illuminate/contracts": "^11.0||^12.0"
+    },
+    "require-dev": {
+        "nunomaduro/collision": "^8.8",
+        "orchestra/testbench": "^10.0.0||^9.0.0",
+        "pestphp/pest": "^4.0",
+        "pestphp/pest-plugin-arch": "^4.0",
+        "pestphp/pest-plugin-laravel": "^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Traineratwot\EloquentMeta\": "src/",
+            "Traineratwot\EloquentMeta\Database\Factories\": "database/factories/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Traineratwot\EloquentMeta\Tests\": "tests/",
+            "Workbench\App\": "workbench/app/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": "@composer run prepare",
+        "prepare": "@php vendor/bin/testbench package:discover --ansi",
+        "analyse": "vendor/bin/phpstan analyse",
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage",
+        "format": "vendor/bin/pint"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Traineratwot\EloquentMeta\EloquentMetaServiceProvider"
+            ],
+            "aliases": {
+                "EloquentMeta": "Traineratwot\EloquentMeta\Facades\EloquentMeta"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
+```
+
+```dev/composer.json
+{
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "laravel/laravel",
+    "type": "project",
+    "description": "The skeleton application for the Laravel framework.",
+    "keywords": [
+        "laravel",
+        "framework"
+    ],
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../"
+        }
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^8.2",
+        "laravel/framework": "^12.0",
+        "laravel/tinker": "^2.10.1"
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.23",
+        "laravel/pail": "^1.2.2",
+        "laravel/pint": "^1.24",
+        "laravel/sail": "^1.41",
+        "mockery/mockery": "^1.6",
+        "nunomaduro/collision": "^8.6",
+        "pestphp/pest": "^4.3",
+        "pestphp/pest-plugin-laravel": "^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\": "app/",
+            "Database\Factories\": "database/factories/",
+            "Database\Seeders\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\": "tests/"
+        }
+    },
+    "scripts": {
+        "setup": [
+            "composer install",
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "@php artisan key:generate",
+            "@php artisan migrate --force",
+            "npm install",
+            "npm run build"
+        ],
+        "dev": [
+            "Composer\Config::disableProcessTimeout",
+            "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1 --timeout=0\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite --kill-others"
+        ],
+        "test": [
+            "@php artisan config:clear --ansi",
+            "@php artisan test"
+        ],
+        "post-autoload-dump": [
+            "Illuminate\Foundation\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi",
+            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
+            "@php artisan migrate --graceful --ansi"
+        ],
+        "pre-package-uninstall": [
+            "Illuminate\Foundation\ComposerScripts::prePackageUninstall"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
+```
