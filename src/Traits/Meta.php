@@ -12,6 +12,17 @@ use Traineratwot\EloquentMeta\Models\EloquentMeta;
  */
 trait Meta
 {
+    /**
+     * Инициализация трейта
+     */
+    public static function bootMeta(): void
+    {
+        static::deleting(function (Model $model) {
+            // Удалить все метаданные при удалении модели
+            $model->metas()->delete();
+        });
+    }
+
     public function meta(string $column, ?string $key = null, mixed $value = null)
     {
         if (blank($key)) {
@@ -69,7 +80,7 @@ trait Meta
     }
 
     /**
-     * Добавить значение в массив метаданных (если это массив)
+     * Добить значение в массив метаданных (если это массив)
      */
     public function pushMeta(string $column, string $key, mixed $value): self
     {
